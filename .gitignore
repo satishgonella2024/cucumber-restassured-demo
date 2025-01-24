@@ -1,0 +1,7 @@
+# Ignore build directories
+app/build/
+build/
+
+# Ignore IDE-specific files
+.idea/
+*.iml

@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Cucumber dependencies
+    testImplementation 'io.cucumber:cucumber-java:7.14.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.14.0'
+
+    // RestAssured dependency
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+
+    // JUnit dependency
+    testImplementation 'junit:junit:4.13.2'
+
+    // Allure dependencies (optional)
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.23.0'
+    testImplementation 'io.qameta.allure:allure-rest-assured:2.23.0'
+}
+
+// Configuration to create a fat JAR
+jar {
+    manifest {
+        attributes 'Main-Class': 'runners.Main'
+    }
+    from {
+        configurations.testRuntimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    from sourceSets.test.output // Include test classes
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+test {
+    useJUnit()
+    systemProperty "cucumber.plugin", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+}
