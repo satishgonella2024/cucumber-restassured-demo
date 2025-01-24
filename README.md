@@ -110,7 +110,7 @@ allure serve build/allure-results
 ```
 
 **Example Report**:
-![Allure Report](https://via.placeholder.com/800x400.png?text=Allure+Report+Screenshot)
+![Allure Report](Cucumber-RestAssured-Demo.jpg)
 
 ---
 
